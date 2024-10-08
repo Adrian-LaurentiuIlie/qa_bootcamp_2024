@@ -51,7 +51,7 @@ public class Hello {
         for(String arg : args){
             System.out.println(arg);
         }
-
+/*
         for(int i = 2; i<= 1000000; i++){
             boolean isPrime = true;
             for(int j = 2; j <= i/2; j++){
@@ -64,5 +64,22 @@ public class Hello {
                 System.out.println("Number " + i + " is prime.");
             }
         }
+ */
+        //Calculate the sum of the first 100 numbers higher than 0. Name the class (and java file) SumOfNumbers.
+        int sum=0;
+        for(int i = 1; i<=100; i++){
+            sum +=i;
+        }
+        System.out.println(sum);
+        //Display the number of days in month February from a year between 1900-2016 that is read from keyboard
+        int year = Integer.parseInt(args[2]);
+        if(year % 4 == 0 && year% 100 != 0){
+            System.out.println("February has 29 days in the year " + year);
+        }else if(year % 100 == 0 && year % 400 != 0){
+            System.out.println("February has 29 days in the year " + year);
+        }else{
+            System.out.println("February has 28 days in the year " + year);
+        }
+
     }
 }
