@@ -75,7 +75,7 @@ public class Hello {
         int year = Integer.parseInt(args[2]);
         if(year % 4 == 0 && year% 100 != 0){
             System.out.println("February has 29 days in the year " + year);
-        }else if(year % 100 == 0 && year % 400 != 0){
+        }else if(year % 100 != 0 && year % 400 == 0){
             System.out.println("February has 29 days in the year " + year);
         }else{
             System.out.println("February has 28 days in the year " + year);
