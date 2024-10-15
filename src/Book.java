@@ -1,30 +1,18 @@
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor @AllArgsConstructor
 public class Book {
 
+    @Getter @Setter
     private String name;
+    @Getter @Setter
     private int year;
+    @Getter @Setter
     private Author author;
+    @Getter @Setter
     private double price;
 
-    public Book(String name, int year, Author author, double price){
-        this.name = name;
-        this.year = year;
-        this.author = author;
-        this.price = price;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public double getPrice() {
-        return price;
-    }
 }

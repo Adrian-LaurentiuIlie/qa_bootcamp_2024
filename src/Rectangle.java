@@ -1,12 +1,14 @@
-public class Rectangle {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    public double length;
-    public double width;
-
-    public Rectangle(double length, double width) {
-        this.length = length;
-        this.width = width;
-    }
+@NoArgsConstructor @AllArgsConstructor
+public class Rectangle extends Shape{
+    @Getter @Setter
+    private double length;
+    @Getter @Setter
+    private double width;
 
     public double getArea(){
         return this.length * this.width;
@@ -18,5 +20,11 @@ public class Rectangle {
 
     public double getParameter(){
         return  2 * (length + width);
+    }
+
+    @Override
+    public void draw() {
+        //super.draw(); //Calla method form super Class
+        System.out.println("Drawing a Rectangle");
     }
 }

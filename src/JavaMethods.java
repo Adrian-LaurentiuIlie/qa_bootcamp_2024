@@ -19,6 +19,84 @@ public class JavaMethods {
         drawFullShape(Integer.parseInt(args[0]));
         drawShapeOutline(Integer.parseInt(args[0]));
         drawShapeCorneres(Integer.parseInt(args[0]));
+
+        System.out.println("-----------------------------------------------");
+        Shape myShape = new Shape();
+        myShape.draw();
+        myShape.erase();
+        myShape.setColor("Green");
+        System.out.println("The Shape has color: "+ myShape.getColor());
+
+        System.out.println("-----------------------------------------------");
+        Rectangle myRectangle = new Rectangle(4, 5);
+        myRectangle.draw();
+
+        System.out.println("-----------------------------------------------");
+        Square mySquare = new Square(12);
+        mySquare.draw();
+        System.out.println("Length " + mySquare.getLength());
+        System.out.println("Diagonal is " + mySquare.getDiagonal());
+
+        System.out.println("-----------------------------------------------");
+        Shape myShape1 = new Square();
+        Shape myShape2 = new Triangle();
+        Shape myShape3 = new Rectangle();
+        Shape myShape4 = new Circle();
+
+        System.out.println("-----------------------------------------------");
+        myShape1.draw();
+        myShape2.draw();
+        myShape3.draw();
+        myShape4.draw();
+
+        System.out.println("-----------------------------------------------");
+        Person teacher1 = new Teacher("UPB");
+        teacher1.setName("Alex");
+        teacher1.setSurname("G");
+        teacher1.eat();
+        ((Teacher)teacher1).teachCourse();
+
+        System.out.println("-----------------------------------------------");
+        Person student1 = new Student();
+        student1.setName("Andrei");
+        student1.setSurname("Studentila");
+        student1.eat();
+        ((Student)student1).takeExam();
+
+        System.out.println("-----------------------------------------------");
+        if(student1.getName() == null){
+            throw new IllegalArgumentException("No name for the student");
+        }
+
+        try{
+            myExceptionMethod();
+        }catch (IllegalArgumentException | MyException ex){
+            System.out.println("Ooppsss an exception " + ex.getMessage());
+        }
+        catch (Exception ex){
+            System.out.println("Generic exception");
+        }
+
+        try {
+            int argument = Integer.parseInt(args[2]);
+        }catch (ArrayIndexOutOfBoundsException ex){
+            System.out.println("Not enough params provided");
+        }catch (NumberFormatException ex){
+            System.out.println("Input is not a integer");
+        }catch (Exception ex){
+            System.out.println("Generic exception");
+        }finally {
+            System.out.println("This line will always execute");
+        }
+    }
+
+    public static void myExceptionMethod() throws MyException {
+        Student s1 = new Student();
+
+        if(s1.getName() == null){
+            //throw new IllegalArgumentException("Exception: No name for the student");
+            throw new MyException("Exception: No name for the student");
+        }
     }
 
     private static void drawShapeCorneres(int width) {
