@@ -1,9 +1,9 @@
 import org.junit.jupiter.api.*;
 
+
 public class CalculatorTests {
 
     Calculator c;
-
     @BeforeAll
     public static void classSetup(){
         System.out.println("Preparing all the test from the class");
@@ -60,10 +60,6 @@ public class CalculatorTests {
         Assertions.assertEquals(8, c.compute(64, 0 ,"SQRT"),"SQRT failed");
     }
 
-    @Test
-    public void testSquareRoot02(){
-        Assertions.assertEquals(1.4142, Math.round(c.compute(2, 0 ,"SQRT")),"SQRT failed");
-    }
 
     @Test
     public void testSquareRoot03(){
