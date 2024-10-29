@@ -51,8 +51,48 @@ public class CalculatorTests {
     }
 
     @Test
+    public void testSubtraction02(){
+        Assertions.assertEquals(-1, c.compute(-8,-7,"-"), "Subtraction failed");
+    }
+
+    @Test
+    public void testSubtraction03(){
+        Assertions.assertEquals(71, c.compute(71,0,"-"), "Subtraction failed");
+    }
+
+    @Test
     public void testMultiplication01(){
         Assertions.assertEquals(14, c.compute(7,2,"*"),"Multiplication failed");
+    }
+
+    @Test
+    public void testMultiplication02(){
+        Assertions.assertEquals(-15, c.compute(5,-3,"*"),"Multiplication failed");
+    }
+
+    @Test
+    public void testMultiplication03(){
+        Assertions.assertEquals(88, c.compute(-11,-8,"*"),"Multiplication failed");
+    }
+
+    @Test
+    public void testMultiplication04(){
+        Assertions.assertEquals(0, c.compute(0,35,"*"),"Multiplication failed");
+    }
+
+    @Test
+    public void testDivision01(){
+        Assertions.assertEquals(11, c.compute(77,7,"/"), "Division failed");
+    }
+
+    @Test
+    public void testDivision02(){
+        Assertions.assertEquals(-5, c.compute(-25,5,"/"), "Division failed");
+    }
+
+    @Test
+    public void testDivision03(){
+        Assertions.assertEquals(0, c.compute(0,21,"/"), "Division failed");
     }
 
     @Test
