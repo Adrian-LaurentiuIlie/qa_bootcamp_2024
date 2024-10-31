@@ -1,30 +1,41 @@
 package frameworkUtils;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
 
 public class Utils {
 
     private static final String configFile = "config.properties";
 
-    public static WebDriver getDriver(){
-
-        WebDriver driver;
+    public static String getConfigProperty(String property) {
         Properties configProperties = new Properties();
-        String browser = "";
-
+        String baseUrl = "";
         try {
             configProperties.load(new FileInputStream(configFile));
-            browser = configProperties.getProperty("browser");
+            baseUrl = configProperties.getProperty(property).toLowerCase();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return baseUrl;
+    }
+
+
+    public static WebDriver getDriver(){
+
+        WebDriver driver;
+        String browser = getConfigProperty("browser");
+
         switch (browser){
             case "chrome" : {
                 driver = new ChromeDriver();
@@ -42,7 +53,14 @@ public class Utils {
                 driver = new ChromeDriver();
             }
         }
+
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         return driver;
+    }
+
+    public static WebElement waitForElement(WebDriver driver, long second, By locator){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(second));
+        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
 }

@@ -1,29 +1,44 @@
 package juiceShop;
 
+import frameworkUtils.Selectors;
 import frameworkUtils.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 public class LoginTests {
 
-    static final String baseUrl = "http://57.151.123.81:3000";
+    static final String baseUrl = Utils.getConfigProperty("baseUrl");
 
     WebDriver driver;
 
+    @DataProvider(name = "RegistrationDataProvider")
+    public Iterator<Object[]> registerDp () {
+        Collection<Object[]> dp = new ArrayList<>();
+        dp.add(new String[] {"alex@alex.com", "Alex98876%", "alex"});
+        return dp.iterator();
+    }
+
     @BeforeMethod
-    public void initDriver(){
+    public void initBrowser(){
         driver = Utils.getDriver();
+        driver.manage().window().fullscreen();
     }
 
     @Test
     public void mainPage(){
-
         driver.get(baseUrl + "/#/");
+        WebElement pageText = driver.findElement(By.cssSelector(Selectors.ALL_PRODUCTS_SELECTOR));
+        Assert.assertEquals(pageText.getText(), "All Products");
     }
 
     @Test
@@ -31,16 +46,59 @@ public class LoginTests {
 
         driver.get(baseUrl + "/#/login");
 
-        //WebElement dismissModalElemental = driver.findElement(By.cssSelector("#mat-dialog-0 > app-welcome-banner > div > div:nth-child(3) > button.mat-focus-indicator.close-dialog.mat-raised-button.mat-button-base.mat-primary.ng-star-inserted"));
-        //dismissModalElemental.click();
+        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        WebElement loginElement = driver.findElement(By.id("email"));
+        //WebElement dismissModalElement = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#mat-dialog-0 > app-welcome-banner > div > div:nth-child(3) > button.mat-focus-indicator.close-dialog.mat-raised-button.mat-button-base.mat-primary.ng-star-inserted")));
+        //WebElement dismissModalElement = driver.findElement(By.cssSelector("#mat-dialog-0 > app-welcome-banner > div > div:nth-child(3) > button.mat-focus-indicator.close-dialog.mat-raised-button.mat-button-base.mat-primary.ng-star-inserted"));
+
+        WebElement dismissModalElement = Utils.waitForElement(driver, 5, By.cssSelector(Selectors.MODAL_OK_BUTTON));
+        dismissModalElement.click();
+
+        WebElement loginElement = driver.findElement(By.id(Selectors.USERNAME_ID));
         loginElement.sendKeys("alex@alex.com");
-        WebElement passwordElement = driver.findElement(By.id("password"));
+        WebElement passwordElement = driver.findElement(By.id(Selectors.PASSWORD_ID));
         passwordElement.sendKeys("Adc123$");
-        WebElement submitButton = driver.findElement(By.id("loginButton"));
+        WebElement submitButton = driver.findElement(By.id(Selectors.SUBMIT_ID));
         submitButton.click();
 
+    }
+
+    @Test
+    public void loginRegister(){
+        driver.get(baseUrl + "/#/login");
+
+        WebElement dismissModalElement = Utils.waitForElement(driver, 5, By.cssSelector(Selectors.MODAL_OK_BUTTON));
+        dismissModalElement.click();
+
+        WebElement registerLink = driver.findElement(By.cssSelector(Selectors.REGISTER_URL));
+        registerLink.click();
+
+        Assert.assertEquals(driver.findElement(By.cssSelector(Selectors.REGISTER_HEADER)).getText(), "User Registration");
+
+        WebElement usernameElement = driver.findElement(By.id(Selectors.REGISTER_EMAIL));
+        usernameElement.clear();
+        usernameElement.sendKeys("alex@alex.com");
+
+        WebElement passwordElement = driver.findElement(By.id(Selectors.REGISTER_PASSWORD));
+        passwordElement.clear();
+        passwordElement.sendKeys("Adc123$");
+
+        WebElement passwordConfirmElement = driver.findElement(By.id(Selectors.REGISTER_CONFIRM));
+        passwordConfirmElement.clear();
+        passwordConfirmElement.sendKeys("Adc123$");
+
+        WebElement securityQuestion = driver.findElement(By.cssSelector(Selectors.SECURITY_QUESTION));
+        securityQuestion.click();
+
+        WebElement securityQuestionChoice = driver.findElement(By.cssSelector(Selectors.SECURITY_OPTION1));
+        securityQuestionChoice.click();
+
+        WebElement securityAnswerer = driver.findElement(By.id(Selectors.SECURITY_ANSWERER));
+        securityAnswerer.clear();
+        securityAnswerer.sendKeys("Alex");
+
+        WebElement submitButton = driver.findElement(By.id(Selectors.REGISTER_SUBMIT_BUTTON));
+        submitButton.click();
     }
 
     @AfterMethod
