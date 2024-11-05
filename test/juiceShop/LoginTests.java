@@ -63,8 +63,8 @@ public class LoginTests {
 
     }
 
-    @Test
-    public void loginRegister(){
+    @Test(dataProvider  = "RegistrationDataProvider")
+    public void loginRegister(String username, String password, String securityAnswere){
         driver.get(baseUrl + "/#/login");
 
         WebElement dismissModalElement = Utils.waitForElement(driver, 5, By.cssSelector(Selectors.MODAL_OK_BUTTON));
@@ -77,15 +77,15 @@ public class LoginTests {
 
         WebElement usernameElement = driver.findElement(By.id(Selectors.REGISTER_EMAIL));
         usernameElement.clear();
-        usernameElement.sendKeys("alex@alex.com");
+        usernameElement.sendKeys(username);
 
         WebElement passwordElement = driver.findElement(By.id(Selectors.REGISTER_PASSWORD));
         passwordElement.clear();
-        passwordElement.sendKeys("Adc123$");
+        passwordElement.sendKeys(password);
 
         WebElement passwordConfirmElement = driver.findElement(By.id(Selectors.REGISTER_CONFIRM));
         passwordConfirmElement.clear();
-        passwordConfirmElement.sendKeys("Adc123$");
+        passwordConfirmElement.sendKeys(password);
 
         WebElement securityQuestion = driver.findElement(By.cssSelector(Selectors.SECURITY_QUESTION));
         securityQuestion.click();
@@ -95,7 +95,7 @@ public class LoginTests {
 
         WebElement securityAnswerer = driver.findElement(By.id(Selectors.SECURITY_ANSWERER));
         securityAnswerer.clear();
-        securityAnswerer.sendKeys("Alex");
+        securityAnswerer.sendKeys(securityAnswere);
 
         WebElement submitButton = driver.findElement(By.id(Selectors.REGISTER_SUBMIT_BUTTON));
         submitButton.click();
