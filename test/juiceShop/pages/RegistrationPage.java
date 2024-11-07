@@ -1,9 +1,7 @@
 package juiceShop.pages;
 
 import juiceShop.frameworkUtils.Utils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 public class RegistrationPage extends BasePage {
 
@@ -17,7 +15,7 @@ public class RegistrationPage extends BasePage {
     private static final String REGISTER_SUBMIT_BUTTON = "registerButton";
     private static final String REGISTER_STATIC_TEXT = "User Registration";
     private static final String COOKIES_MODAL = "body > div.cc-window.cc-floating.cc-type-info.cc-theme-classic.cc-bottom.cc-right.cc-color-override--1225450786 > div > a";
-    private static final String LANGUAGE_MODAL = "#div.mat-simple-snack-bar-content";
+    private static final String LANGUAGE_MODAL = "#cdk-overlay-5 > snack-bar-container > div > div > simple-snack-bar > div > button";
 
     public RegistrationPage(WebDriver driver) {
         super(driver);
@@ -32,6 +30,9 @@ public class RegistrationPage extends BasePage {
     }
 
     public void register(String email, String password, String securityAnsware){
+        //WebElement langaugeButton = driver.findElement(By.cssSelector(LANGUAGE_MODAL));
+        //langaugeButton.click();
+
         WebElement emailField = driver.findElement(By.id(REGISTER_EMAIL));
         WebElement passwordField = driver.findElement(By.id(REGISTER_PASSWORD));
         WebElement passwordConfirm = driver.findElement(By.id(REGISTER_CONFIRM));
@@ -52,9 +53,8 @@ public class RegistrationPage extends BasePage {
         securityAnswareField.sendKeys(securityAnsware);
         WebElement cookiesButton = driver.findElement(By.cssSelector(COOKIES_MODAL));
         cookiesButton.click();
-        //WebElement languageModal = driver.findElement(By.cssSelector(LANGUAGE_MODAL));
-        //languageModal.
         WebElement submitButton = driver.findElement(By.id(REGISTER_SUBMIT_BUTTON));
+        Utils.scrollToElement(driver, submitButton);
         submitButton.click();
 
     }
