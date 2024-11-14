@@ -7,13 +7,11 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Driver;
 import java.time.Duration;
 import java.util.Properties;
 import java.util.Set;
@@ -91,6 +89,11 @@ public class Utils {
 
         //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         return driver;
+    }
+
+    public static void waitToBeClickable(WebDriver driver, WebElement element){
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].click();", element);
     }
 
     public static WebElement waitForElement(WebDriver driver, long second, By locator){

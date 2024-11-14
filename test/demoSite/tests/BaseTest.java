@@ -20,10 +20,10 @@ public class BaseTest {
     @AfterMethod
     public void closeBrowser() {
         try {
-            driver.close();
+            //driver.close();
         }
         catch (Exception ex) {
-            driver.quit();
+            //driver.quit();
         }
     }
 }

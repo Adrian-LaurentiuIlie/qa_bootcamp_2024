@@ -1,6 +1,5 @@
 package demoSite.tests;
 
-import com.beust.ah.A;
 import juiceShop.frameworkUtils.Utils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
