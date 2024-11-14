@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
+import java.util.Random;
 import java.util.Set;
 
 public class Utils {
@@ -116,5 +117,10 @@ public class Utils {
         for(Cookie c : cookies){
             System.out.println(c.toJson());
         }
+    }
+
+    public static int generateRandomNumber(int maxNumber){
+        Random r = new Random();
+        return r.nextInt() % maxNumber;
     }
 }
