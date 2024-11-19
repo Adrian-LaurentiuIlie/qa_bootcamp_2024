@@ -13,7 +13,7 @@
         <lombokVersion>1.18.34</lombokVersion>
         <testnjVersion>7.10.2</testnjVersion>
         <surefireVersion>3.5.1</surefireVersion>
-        <suiteFile>testSuites/runSuites.xml</suiteFile>
+        <suiteFile>testSuites/petStoreSuites.xml</suiteFile>
         <extentReportsVersion>5.1.2</extentReportsVersion>
         <seleniumJavaVersion>4.25.0</seleniumJavaVersion>
         <restAssuredVersion>5.5.0</restAssuredVersion>
