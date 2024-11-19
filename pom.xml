@@ -19,6 +19,7 @@
         <restAssuredVersion>5.5.0</restAssuredVersion>
         <hamcrestVersion>3.0</hamcrestVersion>
         <gsonVersion>2.9.0</gsonVersion>
+        <surefireRunnerVersion>3.5.2</surefireRunnerVersion>
     </properties>
 
     <dependencies>
@@ -95,6 +96,13 @@
                             <suiteXmlFile>${suiteFile}</suiteXmlFile>
                         </suiteXmlFiles>
                     </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.maven.surefire</groupId>
+                            <artifactId>surefire-testng</artifactId>
+                            <version>${surefireRunnerVersion}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>
